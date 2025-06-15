@@ -24,6 +24,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/footer.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/article-layout-fix.css') }}"
+    />
     <script
       src="https://kit.fontawesome.com/30b2892a0a.js"
       crossorigin="anonymous"
@@ -39,7 +43,10 @@
           class="brand-logo"
         />
       </div>
-      <nav class="nav-menu">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav-menu" id="nav-menu">
         <a href="/"
           ><img
             src="{{ url_for('static', filename='img/home.png') }}"
@@ -113,7 +120,7 @@
           <div class="footer-brand">
             <h2>Stuntify</h2>
             <div class="social-links">
-              <a href="https://github.com/FadlanAmin0" class="social-link"
+              <a href="https://github.com/kyujizt" class="social-link"
                 ><i class="fab fa-github"></i
               ></a>
             </div>
@@ -151,5 +158,36 @@
     ></script>
     <script src="{{ url_for('static', filename='js/articel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar-scroll.js') }}"></script>
+    
+    <!-- Mobile menu toggle JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (mobileMenuToggle && navMenu) {
+          mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', function(event) {
+            if (!event.target.closest('.nav-menu') && 
+                !event.target.closest('.mobile-menu-toggle') && 
+                navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+            }
+          });
+          
+          // Close menu when window is resized to desktop size
+          window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>

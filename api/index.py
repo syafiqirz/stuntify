@@ -13,6 +13,18 @@ app = Flask(__name__,
            template_folder=os.path.join(basedir, 'templates'),
            static_folder=os.path.join(basedir, 'static'))
 
+# Create Flask app with explicit template folder path
+app = Flask(__name__, 
+           template_folder=os.path.join(basedir, 'templates'),
+           static_folder=os.path.join(basedir, 'static'))
+
+# Allow webpack dev server proxy when in development mode
+@app.after_request
+def add_header(response):
+    response.headers['Cache-Control'] = 'no-store'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 # Local AI is now used for chat responses
 # No API keys needed - using the custom JavaScript implementation
 
@@ -182,9 +194,4 @@ def make_prediction(gender, age_months, height_cm, weight_kg):
     }
 
 if __name__ == '__main__':
-    print("Starting Flask application...")
-    print(f"Base directory: {basedir}")
-    print(f"Template folder: {os.path.join(basedir, 'templates')}")
-    print(f"Static folder: {os.path.join(basedir, 'static')}")
-    print("Make sure to run 'python train_model.py' first if you haven't already!")
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)

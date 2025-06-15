@@ -13,12 +13,8 @@
     />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/index.css') }}"
-    />
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"    />    <!-- Webpack bundled CSS will be injected here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/921.css') }}" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/map-filter.css') }}"
@@ -26,10 +22,26 @@
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/alur.css') }}"
+    />    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/footer.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/footer.css') }}"
+      href="{{ url_for('static', filename='css/articel.css') }}"
+    />    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar-fixes.css') }}"
+    />    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/common-styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/footer-fix.css') }}"
     />
     <script
       src="https://kit.fontawesome.com/30b2892a0a.js"
@@ -37,6 +49,7 @@
     ></script>
   </head>
   <body>
+    <!-- 1. Header/Navbar -->
     <header class="navbar">
       <div class="nav-brand">
         <img
@@ -45,7 +58,10 @@
           class="brand-logo"
         />
       </div>
-      <nav class="nav-menu">
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav-menu" id="nav-menu">
         <a href="/" class="active"
           ><img
             src="{{ url_for('static', filename='img/home.png') }}"
@@ -82,7 +98,23 @@
     </header>
 
     <main>
+      <!-- 2. Tentang section -->
+      <section class="tentang section-box">
+        <img
+          src="{{ url_for('static', filename='img/Keluarga.png') }}"
+          alt="Keluarga"
+        />
+        <p>
+          <strong>Tentang Stunting Information Center</strong><br />
+          Stunting Information Center adalah sebuah website yang bergerak di
+          bidang kesehatan, khususnya stunting. Diharapkan dengan hadirnya
+          website ini, masyarakat dapat mengakses informasi dengan lebih mudah
+          dan juga dapat menganalisis apakah anaknya berisiko stunting atau
+          tidak.
+        </p>
+      </section>      <!-- 3. Fitur section -->
       <section class="fitur section-box">
+        <h2>Fitur</h2>
         <div class="fitur-container">
           <div class="fitur-box">
             <a
@@ -115,36 +147,7 @@
         </div>
       </section>
 
-      <section class="tentang section-box">
-        <img
-          src="{{ url_for('static', filename='img/Keluarga.png') }}"
-          alt="Keluarga"
-        />
-        <p>
-          <strong>Tentang Stunting Information Center</strong><br />
-          Stunting Information Center adalah sebuah website yang bergerak di
-          bidang kesehatan, khususnya stunting. Diharapkan dengan hadirnya
-          website ini, masyarakat dapat mengakses informasi dengan lebih mudah
-          dan juga dapat menganalisis apakah anaknya berisiko stunting atau
-          tidak.
-        </p>
-      </section>
-
-      <section class="artikel section-box">
-        <h2>Artikel Edukasi</h2>
-        <div class="artikel-container" id="homeArticles">
-          <!-- Artikel akan dimuat secara dinamis dari API -->
-          <div class="artikel-item">
-            <div class="loading-placeholder">
-              <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <p>Memuat artikel...</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <!-- 4. Alur Penggunaan section -->
       <section id="alur-penggunaan" class="alur-penggunaan section-box">
         <h2>Alur Pemakaian Prediksi Stunting</h2>
         <div class="alur-container">
@@ -189,6 +192,25 @@
         </div>
       </section>
 
+      <!-- 5. Artikel Edukasi section -->      <section class="artikel section-box">
+        <h2>Artikel Edukasi</h2>
+        <div class="artikel-container" id="homeArticles">
+          <!-- Artikel akan dimuat secara dinamis dari API -->
+          <div class="artikel-item">
+            <div class="loading-placeholder">
+              <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p>Memuat artikel...</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4" id="lihatSemuaArtikelContainer">
+          <a href="/articel.html" class="btn btn-outline-success">Lihat Semua Artikel</a>
+        </div>
+      </section>
+
+      <!-- 6. Peta Daerah Terindikasi Stunting section -->
       <section id="peta" class="peta section-box">
         <h2>Daerah Terindikasi Stunting</h2>
 
@@ -251,13 +273,14 @@
       </section>
     </main>
 
+    <!-- 7. Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
       <div class="container">
         <div class="footer-content">
           <div class="footer-brand">
             <h2>Stuntify</h2>
             <div class="social-links">
-              <a href="https://github.com/FadlanAmin0" class="social-link"
+              <a href="https://github.com/kyujizt" class="social-link"
                 ><i class="fab fa-github"></i
               ></a>
             </div>
@@ -304,12 +327,40 @@
 
       // Tidak ada kode filter yang diperlukan lagi karena visualisasi Tableau menangani semua interaksi
     </script>
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        if (mobileMenuToggle && navMenu) {
+          mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+          });
+          
+          // Close menu when clicking outside
+          document.addEventListener('click', function(event) {
+            if (!event.target.closest('.nav-menu') && 
+                !event.target.closest('.mobile-menu-toggle') && 
+                navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+            }
+          });
+          
+          // Close menu when window is resized to desktop size
+          window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>    <script src="{{ url_for('static', filename='js/navbar-scroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index-articles.js') }}"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Script untuk mengambil artikel dari API -->
-    <script src="{{ url_for('static', filename='js/index-articles.js') }}"></script>
+      crossorigin="anonymous"    ></script>    <!-- Webpack bundled JS -->    <script src="{{ url_for('static', filename='dist/js/16.js') }}"></script>
+    <script src="{{ url_for('static', filename='dist/js/main.js') }}"></script>
   </body>
 </html>

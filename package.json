@@ -1,0 +1,32 @@
+{
+  "name": "capstone-stunting-app",
+  "version": "1.0.0",
+  "description": "Flask web app with Webpack bundler for stunting detection",
+  "main": "src/js/index.js",  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "serve": "webpack serve --mode development --no-open",
+    "start:flask": "python app.py",
+    "start:dev": "concurrently \"npm run serve\" \"npm run start:flask\"",
+    "start:windows": "start-dev.bat",
+    "start:alt": "start-alt.bat",
+    "debug:webpack": "webpack serve --mode development --no-open --info-verbosity verbose",
+    "troubleshoot": "troubleshoot.bat"
+  },
+  "keywords": ["flask", "webpack", "stunting", "ml", "health"],
+  "author": "Capstone Team",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "html-webpack-plugin": "^5.5.3",
+    "copy-webpack-plugin": "^11.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {}
+}

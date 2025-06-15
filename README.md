@@ -1,28 +1,83 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+# Stuntify - Stunting Detection Web Application
 
-# Flask + Vercel
+## About the Project
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+Stuntify is a web application designed to detect and provide recommendations for stunting in children. This application uses machine learning models to analyze growth data and provide personalized recommendations.
 
-## Demo
+## Technology Stack
 
-https://flask-python-template.vercel.app/
+- **Backend**: Flask (Python)
+- **Frontend**: HTML, CSS, JavaScript
+- **Module Bundling**: Webpack 
+- **Machine Learning**: Scikit-learn
 
-## How it Works
+## Webpack Integration
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+This project uses Webpack for modern frontend asset management. Benefits include:
 
-## Running Locally
+- **Modular JavaScript**: Code split into reusable modules
+- **CSS Processing**: Structured CSS organization with component-based approach
+- **Asset Optimization**: Minification and optimization of assets for production
+- **Development Experience**: Hot reloading during development
 
-```bash
-npm i -g vercel
-vercel dev
+### Project Structure
+
+```
+src/
+  ├── css/
+  │   ├── components/      # Reusable UI component styles
+  │   ├── pages/           # Page-specific styles
+  │   ├── main.css         # Global styles and imports
+  │   ├── articel.css      # Article page entry point
+  │   └── stunting.css     # Stunting page entry point
+  │
+  └── js/
+      ├── modules/         # Reusable JavaScript modules
+      ├── index.js         # Home page entry point
+      ├── articel.js       # Article page entry point
+      └── stunting.js      # Stunting page entry point
 ```
 
-Your Flask application is now available at `http://localhost:3000`.
+## Development Setup
 
-## One-Click Deploy
+### Prerequisites
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+- Python 3.8+
+- Node.js and npm
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+### Installation
+
+1. Clone the repository
+2. Install Python dependencies:
+```
+pip install -r requirements.txt
+```
+3. Install Node.js dependencies:
+```
+npm install
+```
+
+### Running the Application
+
+For development with hot-reloading:
+```
+start-dev.bat
+```
+
+This will start both the Flask server (port 5000) and Webpack dev server (port 3000).
+
+### Building for Production
+
+```
+npm run build
+```
+
+This will generate optimized assets in the `static/dist` folder.
+
+## Project Structure
+
+- `app.py`: Main Flask application
+- `webpack.config.js`: Webpack configuration
+- `src/`: Source files for JavaScript and CSS
+- `static/`: Static assets and compiled files
+- `templates/`: HTML templates
