@@ -347,6 +347,9 @@
     <script src="../static/js/custom-ai-assistant.js"></script>
 
     <script>
+      // Ganti dengan URL backend Railway Anda
+      const BACKEND_URL = "https://stuntify-production.up.railway.app";
+
       // Standar Height-for-Age (stunting reference) sesuai WHO
       const stuntingReference = {
         0: [46.1, 45.4],
@@ -442,7 +445,7 @@
         weightKg
       ) {
         try {
-          const ajaxResponse = await fetch("/predict_json", {
+          const ajaxResponse = await fetch(`${BACKEND_URL}/predict_json`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -1340,9 +1343,6 @@
     <!-- navbar-scroll.js now included in webpack bundle -->
   </body>
 </html>
-</html>
-              navMenu.classList.remove('active');
-            }
           });
           
           // Close menu when window is resized to desktop size
